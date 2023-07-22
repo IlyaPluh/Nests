@@ -1,0 +1,36 @@
+{
+  "clock": {
+    "hrtime": [
+      74543,
+      218037083
+    ],
+    "unixtime": 1690036465663
+  },
+  "nodeVersions": {
+    "node": "20.3.1",
+    "acorn": "8.8.2",
+    "ada": "2.5.0",
+    "ares": "1.19.1",
+    "base64": "0.5.0",
+    "brotli": "1.0.9",
+    "cjs_module_lexer": "1.2.2",
+    "cldr": "43.0",
+    "icu": "73.1",
+    "llhttp": "8.1.1",
+    "modules": "115",
+    "napi": "9",
+    "nghttp2": "1.53.0",
+    "nghttp3": "0.7.0",
+    "ngtcp2": "0.8.1",
+    "openssl": "3.0.9+quic",
+    "simdutf": "3.2.12",
+    "tz": "2023c",
+    "undici": "5.22.1",
+    "unicode": "15.0",
+    "uv": "1.45.0",
+    "uvwasi": "0.0.18",
+    "v8": "11.3.244.8-node.9",
+    "zlib": "1.2.13.1-motley"
+  },
+  "toolVersion": "11.0.0"
+}
