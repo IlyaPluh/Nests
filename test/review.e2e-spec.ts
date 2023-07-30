@@ -41,47 +41,80 @@ describe('AppController (e2e)', () => {
 		token = body.access_token;
 	});
 
-	it('/review/create (POST) - success', async (done) => {
-		return request(app.getHttpServer())
-			.post('/review/create')
-			.send(testDto)
-			.expect(201)
-			.then(({ body }: request.Response) => {
-				createdId = body._id;
-				expect(createdId).toBeDefined();
-				done();
-			});
+	// it('/review/create (POST) - success', async (done) => {
+	// 	return request(app.getHttpServer())
+	// 		.post('/review/create')
+	// 		.send(testDto)
+	// 		.expect(201)
+	// 		.then (({ body }: request.Response) => {
+	// 			createdId = body._id;
+	// 			expect(createdId).toBeDefined();
+	// 			done();
+	// 		});
+	// });
+
+	it('/review/create (POST) - successNEW', async () => {
+		const response = await request(app.getHttpServer())
+		  .post('/review/create')
+		  .send(testDto)
+		  .expect(201);
+	  
+		const { body } = response;
+		createdId = body._id;
+	  
+		expect(createdId).toBeDefined();
 	});
 
-	it('/review/create (POST) - fail', async (done) => {
+	it('/review/create (POST) - fail', () => {
 		return request(app.getHttpServer())
 			.post('/review/create')
 			.send({ ...testDto, rating: 0 })
 			.expect(400)
-			.then(({ body }: request.Response) => {
-				done();
-			});
+			// .then(({ body }: request.Response) => {
+			// 	done();
+			// });
 	});
 
-	it('/review/byProduct/:productId (GET) - success', async (done) => {
-		return request(app.getHttpServer())
-			.get('/review/byProduct/' + productId)
-			.expect(200)
-			.then(({ body }: request.Response) => {
-				expect(body.length).toBe(1);
-				done();
-			});
-	});
+	// it('/review/byProduct/:productId (GET) - success', async (done) => {
+	// 	return request(app.getHttpServer())
+	// 		.get('/review/byProduct/' + productId)
+	// 		.expect(200)
+	// 		.then(({ body }: request.Response) => {
+	// 			expect(body.length).toBe(1);
+	// 			done();
+	// 		});
+	// });
 
-	it('/review/byProduct/:productId (GET) - fail', async (done) => {
-		return request(app.getHttpServer())
-			.get('/review/byProduct/' + new Types.ObjectId().toHexString())
-			.expect(200)
-			.then(({ body }: request.Response) => {
-				expect(body.length).toBe(0);
-				done();
-			});
-	});
+	it('/review/byProduct/:productId (GET) - successNEW', async () => {
+		const response = await request(app.getHttpServer())
+		  .get('/review/byProduct/' + productId)
+		  .expect(200);
+	  
+		const { body } = response;
+		expect(body.length).toBe(1);
+	  });
+	  
+
+	// it('/review/byProduct/:productId (GET) - fail', async (done) => {
+	// 	return request(app.getHttpServer())
+	// 		.get('/review/byProduct/' + new Types.ObjectId().toHexString())
+	// 		.expect(200)
+	// 		.then(({ body }: request.Response) => {
+	// 			expect(body.length).toBe(0);
+	// 			done();
+	// 		});
+	// });
+
+	it('/review/byProduct/:productId (GET) - failNew', async () => {
+		const nonExistentProductId = new Types.ObjectId().toHexString();
+		const response = await request(app.getHttpServer())
+		  .get('/review/byProduct/' + nonExistentProductId)
+		  .expect(200);
+	  
+		const { body } = response;
+		expect(body.length).toBe(0);
+	  });
+	  
 
 	it('/review/:id (DELETE) - success', () => {
 		return request(app.getHttpServer())
